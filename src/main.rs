@@ -179,6 +179,8 @@ fn main() {
 		.unwrap();
 	let audio_events = std::io::BufReader::new(audio_events.stdout.unwrap()).lines();
 
+	update_send.send(()).unwrap();
+
 	for event in audio_events {
 		let event = event.unwrap();
 		// Turns out that `pactl subscribe` sends events for when clients connect and disconnect from the bus. We only want change events on sink inputs and source outputs.
